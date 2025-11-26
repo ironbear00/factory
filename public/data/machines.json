@@ -1,0 +1,110 @@
+[
+    {
+        "id": "M-101",
+        "name": "CNC 1호기",
+        "status": "RUNNING",
+        "temperature": 85.2,
+        "vibration": 0.15,
+        "operatingRate": 0.95,
+        "lastUpdated": 1700000000000
+    },
+    {
+        "id": "M-102",
+        "name": "용접 로봇 A",
+        "status": "READY",
+        "temperature": 30.5,
+        "vibration": 0.05,
+        "operatingRate": 0.0,
+        "lastUpdated": 1700000000000
+    },
+    {
+        "id": "M-103",
+        "name": "프레스 3호기",
+        "status": "WARNING",
+        "temperature": 95.8,
+        "vibration": 0.22,
+        "operatingRate": 0.80,
+        "lastUpdated": 1700000000000
+    },
+    {
+        "id": "M-104",
+        "name": "열처리 로(Oven)",
+        "status": "ERROR",
+        "temperature": 105.1,
+        "vibration": 0.35,
+        "operatingRate": 0.0,
+        "lastUpdated": 1700000000000
+    },
+    {
+        "id": "M-105",
+        "name": "검사 카메라 1",
+        "status": "RUNNING",
+        "temperature": 55.0,
+        "vibration": 0.10,
+        "operatingRate": 0.30,
+        "lastUpdated": 1700000000000
+    },
+    {
+        "id": "M-106",
+        "name": "이송 컨베이어",
+        "status": "WARNING",
+        "temperature": 78.3,
+        "vibration": 0.91,
+        "operatingRate": 0.99,
+        "lastUpdated": 1700000000000
+    },
+    {
+        "id": "M-107",
+        "name": "재고 측정 센서",
+        "status": "READY",
+        "temperature": 40.1,
+        "vibration": 0.03,
+        "operatingRate": 0.0,
+        "lastUpdated": 1700000000000
+    },
+    {
+        "id": "M-108",
+        "name": "조립 로봇 B",
+        "status": "RUNNING",
+        "temperature": 88.0,
+        "vibration": 0.12,
+        "operatingRate": 1.0,
+        "lastUpdated": 1700000000000
+    },
+    {
+        "id": "M-109",
+        "name": "품질 검사 장치",
+        "status": "RUNNING",
+        "temperature": 70.0,
+        "vibration": 0.18,
+        "operatingRate": 0.75,
+        "lastUpdated": 1700000000000
+    },
+    {
+        "id": "M-110",
+        "name": "재료 공급 펌프",
+        "status": "RUNNING",
+        "temperature": 89.5,
+        "vibration": 0.20,
+        "operatingRate": 0.60,
+        "lastUpdated": 1700000000000
+    },
+    {
+        "id": "M-111",
+        "name": "냉각 시스템",
+        "status": "READY",
+        "temperature": 25.0,
+        "vibration": 0.01,
+        "operatingRate": 0.0,
+        "lastUpdated": 1700000000000
+    },
+    {
+        "id": "M-112",
+        "name": "압축기 A",
+        "status": "RUNNING",
+        "temperature": 80.0,
+        "vibration": 0.30,
+        "operatingRate": 0.85,
+        "lastUpdated": 1700000000000
+    }
+]

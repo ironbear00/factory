@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import type { MachineData } from '../models/MachineData'; 
 import { useDashboard } from '../context/DashboardContext';
 
@@ -7,23 +7,35 @@ interface MachineCardProps {
 }
 
 const MachineCard: React.FC<MachineCardProps> = React.memo(({ machine }) => {
-    // 1. useDashboard에서 경고 임계치(Threshold)를 가져옵니다.
+    
     const { state } = useDashboard();
     const temperatureThreshold = state.threshold.temperature;
 
-    // 2. 경고 로직: 온도가 임계치를 초과했는지 확인합니다.
     const isWarning = machine.temperature > temperatureThreshold;
 
-    // 3. 동적 Tailwind 클래스 결정 (경고 시 UI 색상 변경)
+    const riskScore = useMemo(() => {
+        console.log(`[${machine.name}] 위험 지수 재계산 중...`); 
+        
+        let score = 0;
+        const tempFactor = (machine.temperature / temperatureThreshold);
+        score += tempFactor * 50; 
+        score += machine.vibration * 200; 
+        score -= machine.operatingRate * 10;
+        
+        return score.toFixed(2);
+        
+    // 이 3가지 값이 변해야만 위의 로직이 재실행됩니다.
+    }, [machine.temperature, machine.vibration, machine.operatingRate, temperatureThreshold]);
+
+
     const cardClass = `
         p-5 rounded-xl shadow-lg transition-all duration-300 
         ${isWarning 
-            ? 'bg-red-50 ring-4 ring-red-400' // 경고 발생 시 붉은색 강조
-            : 'bg-white hover:shadow-xl'       // 정상 시 흰색
+            ? 'bg-red-50 ring-4 ring-red-400' 
+            : 'bg-white hover:shadow-xl'     
         }
     `;
     
-    // 4. 상태 뱃지 색상 결정
     const statusColor = {
         'RUNNING': 'bg-green-500',
         'READY': 'bg-gray-500',
@@ -54,6 +66,12 @@ const MachineCard: React.FC<MachineCardProps> = React.memo(({ machine }) => {
                         {(machine.operatingRate * 100).toFixed(0)}%
                     </span>
                 </div>
+                <div className="flex justify-between border-t pt-2">
+                    <span className="font-medium text-gray-700">종합 위험 지수:</span>
+                    <span className="text-xl font-extrabold text-purple-600">
+                        {riskScore}
+                    </span>
+                </div>
                 {/* Day 4에서 여기에 실시간 차트를 추가하게 됩니다. */}
             </div>
             
@@ -63,5 +81,7 @@ const MachineCard: React.FC<MachineCardProps> = React.memo(({ machine }) => {
         </div>
     );
 });
+
+
 
 export default MachineCard;

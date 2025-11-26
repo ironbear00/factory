@@ -3,8 +3,25 @@ import { useDashboard } from '../context/DashboardContext';
 import MachineCard from '../components/MachineCard';
 
 const DashboardContainer: React.FC = () => {
-    const { state, dispatch } = useDashboard(); 
+    const { state } = useDashboard(); 
     const { machines, isLoading, error } = state;
+
+    if (error) {
+        return (
+            <div className="flex flex-col justify-center items-center h-screen bg-gray-50 p-8">
+                <div className="p-10 bg-white border-2 border-red-500 rounded-xl shadow-2xl text-center">
+                    <h2 className="text-3xl font-extrabold text-red-600 mb-4">
+                        ⚠️ 시스템 오류 발생
+                    </h2>
+                    <p className="text-gray-700 mb-6">
+                        초기 데이터를 불러오는 데 실패했습니다. 서버 상태를 확인하거나 새로고침 해주세요.
+                    </p>
+                    <p className="text-sm font-mono text-gray-500 bg-gray-100 p-2 rounded">
+                        오류 코드: **{error}** </p>
+                </div>
+            </div>
+        );
+    }
 
     if (isLoading) {
         return (
