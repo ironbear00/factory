@@ -33,19 +33,29 @@ export const useRealtimeData = () => {
     }, [state]);
 
     useEffect(() => {
+        let isRunning=true;
+        if(state.isLoading)
+        {
+            return;
+        }
+
         const intervalId = setInterval(() => {
+            if (!isRunning) return;
+
             const currentMachines = stateRef.current.machines;
 
-            if (stateRef.current.isLoading || !Array.isArray(currentMachines)) {
-                return;
-           }
+            if (!Array.isArray(currentMachines) || currentMachines.length === 0) {
+                 return;
+            }
 
             const updatedMachines = generateUpdatedData(state.machines);
             dispatch({ type: 'UPDATE_REALTIME_DATA', payload: updatedMachines });       
         }, 1000);
+
         return () => {
             clearInterval(intervalId);
+            isRunning = false;
             console.log('✅ Realtime Data Interval Cleared.');
         };
-    }, [dispatch]);
+    }, [dispatch, state.isLoading]);
 };

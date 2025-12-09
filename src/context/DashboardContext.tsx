@@ -1,4 +1,4 @@
-import React, {createContext, useReducer, useContext, useEffect} from 'react';
+import React, {createContext, useReducer, useContext, useEffect, useMemo} from 'react';
 import type { MachineAction } from './DashboardAction';
 import { initialMockState } from './initialState.ts';
 import { dashboardReducer } from './DashboardReducer';
@@ -46,5 +46,14 @@ export const DashboardProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     if (context === undefined) {
       throw new Error('useDashboard must be used within a DashboardProvider');
     }
-    return context;
+    
+    const stableContext = useMemo(() => {
+      return {
+          state: context.state,
+          dispatch: context.dispatch,
+          temperatureThreshold: context.state.threshold.temperature,
+      };
+    }, [context]);
+
+  return stableContext;
   };

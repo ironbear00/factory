@@ -8,8 +8,9 @@ interface MachineCardProps {
 
 const MachineCard: React.FC<MachineCardProps> = React.memo(({ machine }) => {
     
-    const { state } = useDashboard();
-    const temperatureThreshold = state.threshold.temperature;
+    // const { state } = useDashboard();
+    // const temperatureThreshold = state.threshold.temperature;
+    const { temperatureThreshold } = useDashboard();
 
     const isWarning = machine.temperature > temperatureThreshold;
 
@@ -25,7 +26,10 @@ const MachineCard: React.FC<MachineCardProps> = React.memo(({ machine }) => {
         return score.toFixed(2);
         
     // 이 3가지 값이 변해야만 위의 로직이 재실행됩니다.
-    }, [machine.temperature, machine.vibration, machine.operatingRate, temperatureThreshold]);
+    }, [machine.temperature, 
+        machine.vibration, 
+        machine.operatingRate, 
+        temperatureThreshold]);
 
 
     const cardClass = `
