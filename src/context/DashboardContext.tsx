@@ -3,6 +3,7 @@ import type { MachineAction } from './DashboardAction';
 import { initialMockState } from './initialState.ts';
 import { dashboardReducer } from './DashboardReducer';
 import { fetchAllMachines } from '../api/machineApi.ts';
+import { useRealtimeData } from '../hooks/useRealtimeData';
 
 interface DashboardContextProps {
   state: typeof initialMockState;
@@ -11,9 +12,15 @@ interface DashboardContextProps {
 
 const DashboardContext = createContext<DashboardContextProps | undefined>(undefined);
 
+const RealtimeDataStarter: React.FC = () => {
+  useRealtimeData();
+  return null;
+};
+
 export const DashboardProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [state, dispatch] = useReducer(dashboardReducer, initialMockState);
   
+
     useEffect(() => {
       const loadInitialData = async () => {
         try {
@@ -28,12 +35,12 @@ export const DashboardProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   
     return (
       <DashboardContext.Provider value={{ state, dispatch }}>
-        {children}
+        <RealtimeDataStarter />
+          {children}
       </DashboardContext.Provider>
     );
   };
-  
-  //create hook
+
   export const useDashboard = () => {
     const context = useContext(DashboardContext);
     if (context === undefined) {
