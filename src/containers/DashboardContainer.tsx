@@ -39,19 +39,40 @@ const DashboardContainer: React.FC = () => {
         );
     }
 
-    return (
-        <div className="p-6 bg-gray-100 min-h-screen">
-            <h2 className="text-3xl font-bold text-gray-800 mb-6">🛠️ 제조 라인 현황</h2>
+    // return (
+    //     <div className="p-6 bg-gray-100 min-h-screen">
+    //         <h2 className="text-3xl font-bold text-gray-800 mb-6">🛠️ 제조 라인 현황</h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {
-                    machines.map((machine) => (
-                        <MachineCard key={machine.id} machine={machine} /> 
-                    ))
-                }
+    //         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+    //             {
+    //                 machines.map((machine) => (
+    //                     <MachineCard key={machine.id} machine={machine} /> 
+    //                 ))
+    //             }
+    //         </div>
+    //     </div>
+    // );
+    return (
+        <div className="min-h-screen bg-gray-50 p-8">
+          {/* 헤더 섹션 */}
+          <header className="mb-10 flex justify-between items-end">
+            <div>
+              <h1 className="text-3xl font-extrabold text-gray-900">공정 실시간 모니터링</h1>
+              <p className="text-gray-500 mt-2">전체 {machines.length}개의 장비가 연결되어 있습니다.</p>
             </div>
+            <div className="text-sm font-medium px-3 py-1 bg-green-100 text-green-700 rounded-full animate-pulse">
+              ● Live 데이터 수신 중
+            </div>
+          </header>
+      
+          {/* 💡 카드 그리드 레이아웃: 반응형 설정 (모바일 1열, 태블릿 2열, PC 3~4열) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {machines.map((machine) => (
+              <MachineCard key={machine.id} machine={machine} />
+            ))}
+          </div>
         </div>
-    );
+      );
 };
 
 export default DashboardContainer;
